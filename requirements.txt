@@ -3,3 +3,4 @@ pdfminer.six
 python-docx
 nltk
 Werkzeug
+gunicorn

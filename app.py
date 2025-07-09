@@ -3,8 +3,11 @@ import os
 from pdfminer.high_level import extract_text
 from flask import Flask,render_template,request
 from werkzeug.utils import secure_filename
-from nltk.corpus import stopwords
 from docx import Document
+from nltk.corpus import stopwords
+import nltk
+nltk.download('stopwords')
+
 
 
 app= Flask(__name__)

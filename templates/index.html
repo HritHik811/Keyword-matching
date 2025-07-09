@@ -3,27 +3,88 @@
 <head>
     <title>CV Keyword Matching Score</title>
     <style>
-        body { font-family: Arial; text-align: center; padding: 50px; }
-        .upload-box { margin: 20px auto; width: 300px; padding: 20px; border: 1px solid #000000; border-radius: 10px; }
-        input[type="file"] { margin-bottom: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .upload-box {
+            background-color: white;
+            margin: 20px auto;
+            width: 350px;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        .results {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .results p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .missing {
+            color: red;
+            font-weight: bold;
+        }
+
+        .present {
+            color: green;
+            font-weight: bold;
+        }
+
+        .comment {
+            color: blueviolet;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .score {
+            font-size: 22px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1><B>Upload The CV</B></h1>
+    <h1><b>Upload the CV</b></h1>
+    
     <div class="upload-box">
         <form enctype="multipart/form-data" action="/" method="post">
-            <p>Upload File: <input type="file" name="cv" /></p>
+            <p>Upload File: <input type="file" name="cv" required /></p>
             <p><input type="submit" value="Upload" /></p>
         </form>
     </div>
- 
-    <h2>Results for: {{ filename }}</h2>
-    <p><strong>Score:</strong> {{ score }}%</p>
-    <p><span style="color:blueviolet;font-weight:bold">{{comment}}</span></p>
-    <p><span style="color: red; font-weight: bold">Missing keyword:</span>{{missing}}</p>
-    <p><span style="color: green; font-weight: bold">present keyword:</span>{{present}}</p>
-    
+
+    {% if filename %}
+    <div class="results">
+        <h2>Results for: <em>{{ filename }}</em></h2>
+        <p class="score">Score: {{ score }}%</p>
+        <p class="comment">{{ comment }}</p>
+        <p class="missing">Missing Keywords: {{ missing }}</p>
+        <p class="present">Present Keywords: {{ present }}</p>
+    </div>
+    {% endif %}
 </body>
 </html>
-
-

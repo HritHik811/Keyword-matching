@@ -9,7 +9,6 @@ import nltk
 nltk.download('stopwords')
 
 
-
 app= Flask(__name__)
 upload_folder='uploads'
 app.config['UPLOAD_FOLDER']=upload_folder

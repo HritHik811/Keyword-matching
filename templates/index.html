@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CV Keyword Matching Score</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; }
+        .upload-box { margin: 20px auto; width: 300px; padding: 20px; border: 1px solid #000000; border-radius: 10px; }
+        input[type="file"] { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1><B>Upload The CV</B></h1>
+    <div class="upload-box">
+        <form enctype="multipart/form-data" action="/" method="post">
+            <p>Upload File: <input type="file" name="cv" /></p>
+            <p><input type="submit" value="Upload" /></p>
+        </form>
+    </div>
+ 
+    <h2>Results for: {{ filename }}</h2>
+    <p><strong>Score:</strong> {{ score }}%</p>
+    <p><span style="color:blueviolet;font-weight:bold">{{comment}}</span></p>
+    <p><span style="color: red; font-weight: bold">Missing keyword:</span>{{missing}}</p>
+    <p><span style="color: green; font-weight: bold">present keyword:</span>{{present}}</p>
+    
+</body>
+</html>
+
+

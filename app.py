@@ -16,7 +16,7 @@ stop_w = set(stopwords.words('english'))
 os.makedirs(upload_folder, exist_ok=True)
 
 
-keywords = ["python", "machine learning", "flask","sql","api","html","javascript","aws","cloud"]
+keywords = ["python", "machine learning", "flask","sql","html","javascript","aws","cloud","git","linux"]
 
 
 def extract_from_pdf(filename):

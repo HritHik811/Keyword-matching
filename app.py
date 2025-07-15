@@ -1,3 +1,4 @@
+
 import re
 import os
 from pdfminer.high_level import extract_text
@@ -52,15 +53,19 @@ def score_cv(filename):
     
     text=clean(rawtext)
     
-    present=[]
+    keyword_count={}
 
     present, missing = [], []
     for i in keywords:
         pattern = r'\b' + re.escape(i.lower()) + r'\b'
-        if re.search(pattern, text):
+        count = len(re.findall(pattern, text))
+        if count > 0:
+            keyword_count[i] = count
             present.append(i)
         else:
+            keyword_count[i] = 0
             missing.append(i)
+
     
     score=(len(present)/len(keywords))*100 
     val=round(score)
@@ -78,7 +83,7 @@ def score_cv(filename):
         comment="Poor match. Not suitable for this position."
         
     
-    return present,missing,val,comment
+    return present,missing,val,comment,keyword_count
 
 
 
@@ -91,13 +96,13 @@ def home():
             filepath=os.path.join(app.config['UPLOAD_FOLDER'],filename)
             uploaded_file.save(filepath)
 
-            present,missing,score,comment=score_cv(filepath)
+            present,missing,score,comment,keyword_count=score_cv(filepath)
             p= ", ".join(present)
             m= ", ".join(missing)
             
-        return render_template('index.html',score=score,filename=filename,missing=m,present=p,comment=comment)
-    
-    return render_template("index.html", score=None, filename=None)
+        return render_template('index.html',score=score,filename=filename,missing=m,present=p,comment=comment,keyword_count=keyword_count)
+
+    return render_template("index.html",score=None,filename=None,present=None,missing=None,comment=None,keyword_count={})
 
 
 if __name__=="__main__":

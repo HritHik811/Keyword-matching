@@ -1,60 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CV Keyword Matching Score</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Classification with Keyword Count</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 40px;
-            background-color: #f4f4f4;
-        }
-        h1 {color: #333;}
-        .upload-box {
-            background-color: white;
-            margin: 20px auto;
-            width: 350px;
-            padding: 25px;
-            border: 1px solid #ccc;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input[type="file"] {margin: 10px 0;}
-        .results {
-            margin-top: 40px;
+            background: #f4f4f4;
+            margin: 0;
             padding: 20px;
-            background-color: #fff;
-            width: 70%;
+            text-align: center;
+        }
+        .upload-box {
+            background: #fff;
+            padding: 20px;
+            margin: auto;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .results {
+            background: #fff;
+            margin-top: 20px;
+            padding: 20px;
+            width: 80%;
             margin-left: auto;
             margin-right: auto;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             text-align: left;
         }
-        .results p {font-size: 16px;margin: 10px 0;}
-        .missing {color: red;font-weight: bold;}
-        .present {color: green;font-weight: bold;}
-        .comment {color: blueviolet;font-weight: bold;font-size: 18px;}
-        .score {font-size: 22px;font-weight: bold;}
+        .results p, .results li {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
-    <h1><b>Upload the CV</b></h1>
-    
+    <h1>CV Classification Using Machine Learning with Keyword Count</h1>
     <div class="upload-box">
-        <form enctype="multipart/form-data" action="/" method="post">
-            <p>Upload File: <input type="file" name="cv" required /></p>
-            <p><input type="submit" value="Upload" /></p>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <p>Upload your CV (.pdf or .docx):</p>
+            <input type="file" name="cv" accept=".pdf,.docx" required>
+            <br><br>
+            <input type="submit" value="Classify">
         </form>
     </div>
 
     {% if filename %}
     <div class="results">
-        <h2>Results for: <em>{{ filename }}</em></h2>
-        <p class="score">Score: {{ score }}%</p>
-        <p class="comment">{{ comment }}</p>
-        <p class="missing">Missing Keywords: {{ missing }}</p>
-        <p class="present">Present Keywords: {{ present }}</p>
+        <h2>Results for: {{ filename }}</h2>
+        <p><strong>Score:</strong> {{ score }}%</p>
+        <p><strong>Comment:</strong> {{ comment }}</p>
+        <p><strong>Present Keywords:</strong> {{ present }}</p>
+        <p><strong>Missing Keywords:</strong> {{ missing }}</p>
+        <h3>Keyword Occurrence Counts:</h3>
+        <ul>
+            {% for keyword, count in keyword_count.items() %}
+            <li>{{ keyword }}: {{ count }}</li>
+            {% endfor %}
+        </ul>
     </div>
     {% endif %}
 </body>

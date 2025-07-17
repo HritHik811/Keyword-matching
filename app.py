@@ -38,8 +38,11 @@ def extract_from_word(filename):
 
 def clean(raw: str) -> str:
     txt = raw.lower()
-    txt = re.sub(r'[^a-z\s]', ' ', txt)   # keep letters/spaces only
-    return re.sub(r'\s+', ' ', txt).strip()
+    txt = re.sub(r'[^a-z\s]', ' ', txt)  
+    txt = re.sub(r'\s+', ' ', txt).strip()
+    words = txt.split()
+    filtered_words = [word for word in words if word not in stop_w]
+    return ' '.join(filtered_words)
 
 
 def score_cv(filename):
